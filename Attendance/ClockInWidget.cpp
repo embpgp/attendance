@@ -212,11 +212,12 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                         SmtpClient smtp("smtp.qq.com",
                                         465,
                                         true?SmtpClient::SslConnection:SmtpClient::TcpConnection);
-
+                        smtp.setUser("aaaaaaaaa@test.com");    //发件人邮箱用户名
+                        smtp.setPassword("xxxxxxxxxx");//发件人邮箱用密码
 
                         //构建邮件主题,包含发件人收件人附件等.
                         MimeMessage message;
-                        message.setSender(new EmailAddress("1132040167@qq.com")); //填写发件人邮箱地址
+                        message.setSender(new EmailAddress("xxxxxxxx@test.com")); //填写发件人邮箱地址
 
                     //    //逐个添加收件人
                     //    QStringList receiver = ui->txtReceiverAddr->text().split(';');
