@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     sendemailapi/smtpclient.cpp \
     timesetdialog.cpp \
     login.cpp \
-    managelogin.cpp
+    managelogin.cpp \
+    Selectwidget.cpp
 
 HEADERS  += \
     ioportManager.h \
@@ -72,7 +73,8 @@ HEADERS  += \
     sendemailapi/smtpmime.h \
     timesetdialog.h \
     login.h \
-    managelogin.h
+    managelogin.h \
+    Selectwidget.h
 
 FORMS    += MainWidget.ui \
     ClockInWidget.ui \
@@ -80,7 +82,8 @@ FORMS    += MainWidget.ui \
     UserEditDialog.ui \
     timesetdialog.ui \
     login.ui \
-    managelogin.ui
+    managelogin.ui \
+    Selectwidget.ui
 
 RESOURCES += \
     res.qrc
