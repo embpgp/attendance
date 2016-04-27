@@ -82,7 +82,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>登录视图</string>
+      <string>考勤记录</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>

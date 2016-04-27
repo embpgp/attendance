@@ -161,12 +161,12 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                     arriveLate = tr("是");
                     leaveEarly = tr("未知");
 
-                    qDebug()<<"ADD";
+
                     arriveLateTimes = 1;
 
-                    qDebug()<<"ADD";
+
                     DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-                    qDebug()<<"ADD";
+
                     QMessageBox::warning(this, tr("警告"), tr("同学你迟到了！"));
                 }
                 if(t>tSplite)
@@ -195,7 +195,9 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                     arriveLate = tr("是");
                     leaveEarly = tr("未知");
                     qDebug()<<"1111 : "<<arriveLateTimes;
+
                     arriveLateTimes++;
+
                     qDebug()<<"2222 : "<<arriveLateTimes;
 
                     DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
@@ -210,8 +212,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                         SmtpClient smtp("smtp.qq.com",
                                         465,
                                         true?SmtpClient::SslConnection:SmtpClient::TcpConnection);
-                        smtp.setUser("1132040167@qq.com");    //发件人邮箱用户名
-                        smtp.setPassword("heheshan159");//发件人邮箱用密码
+
 
                         //构建邮件主题,包含发件人收件人附件等.
                         MimeMessage message;
