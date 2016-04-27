@@ -116,4 +116,35 @@ public:
 protected:
     QSqlQuery *q;
 };
+
+class DBAttendance:public DBControl
+{
+public:
+    DBAttendance(const QString &cardid = "");
+    virtual ~DBAttendance();
+
+    bool first();
+    bool next();
+    QString cardid()const;
+    QString name()const;
+    int arriveLaterTimes()const;
+    int leaveearlyTimes()const;
+    int absenceTimes()const;
+
+    static void addlog(const QString &cardid, const QString &name,int arriveLaterTimes, int leaveearlyTimes, int absenceTimes);
+    static void updatelog(const QString &cardid,const QString &name,int arriveLaterTimes, int leaveearlyTimes, int absenceTimes);
+    static void updatelogwitharrtimes(const QString &cardid, int arriveLaterTimes);
+    static void updatelogwithleatimes(const QString &cardid, int leaveearlyTimes);
+    static void updatelogwithabstimes(const QString &cardid, int absenceTimes);
+
+    static int findarrTimes(const QString &cardid);
+    static int findleaTimes(const QString &cardid);
+    static int findabsTimes(const QString &cardid);
+
+
+protected:
+    QSqlQuery *q;
+
+};
+
 #endif // DBCONTROL_H

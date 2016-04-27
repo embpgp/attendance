@@ -11,7 +11,9 @@
 
 ClockInWidget::ClockInWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::widget)
+    ui(new Ui::widget),
+    leaveearlyTimes(0),
+    absenceTimes(0)
 {
     ui->setupUi(this);
     updateDateTime();
@@ -194,11 +196,11 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                     qDebug()<<"Late Arrive : ";
                     arriveLate = tr("是");
                     leaveEarly = tr("未知");
-                    qDebug()<<"1111 : "<<arriveLateTimes;
+
 
                     arriveLateTimes++;
 
-                    qDebug()<<"2222 : "<<arriveLateTimes;
+
 
                     DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
 

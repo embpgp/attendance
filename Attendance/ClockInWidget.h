@@ -25,9 +25,11 @@ public:
     QString endT;
     QString spliteT;
 
-    QString arriveLate;
-    QString leaveEarly;
-    int arriveLateTimes;
+    QString arriveLate;    //第一次到的时间
+    QString leaveEarly;    //第二次走的时间
+    int arriveLateTimes;   //迟到次数
+    int leaveearlyTimes;    //早退次数
+    int absenceTimes;       //缺勤次数
 
 
 public slots:

@@ -134,6 +134,17 @@ void DBControl::checkDatabase()  // 创建 表
                     <<"[password] TEXT  NOT NULL"
                     );
     }
+    if(!checkTable("tbl_attendance"))     //出勤表
+    {
+        createTable("tbl_attendance", QStringList()
+                    <<"[id] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT"
+                    <<"[cardid] TEXT UNIQUE NOT NULL "
+                    <<"[name] TEXT  NOT NULL"
+                    <<"[arriveLateTimes] INT  NOT NULL"
+                    <<"[leaveearlyTimes] INT NOT NULL"
+                    <<"[absenceTimes] INT NOT NULL"
+                    );
+    }
 }
 
 
@@ -342,9 +353,9 @@ bool DBCard::addCard(const QString &cardid, const QString &name ,const QString &
                     "INSERT INTO [tbl_id] ([cardid], [name], [gender], [occupation], [mailAddress]) VALUES ('%1', '%2', '%3', '%4', '%5')"
                     ).arg(cardid).arg(name).arg(gender).arg(occupation).arg(mailAddress);
         QSqlQuery q(*_mainDB);
-        bool ret = q.exec(sql);
+         q.exec(sql);
         q.finish();
-        //return ret;
+
         return true;
     }
     else
@@ -808,6 +819,222 @@ QString DBLogin::findPassword(const QString &username)
         return QString();
     }
     QString ret = q.value(0).toString();//select 查询的时候只列举了一列，所以索引直接是0
+    q.finish();
+    return ret;
+}
+
+
+
+
+
+/*****************************************************************/
+/* DBAttendance class                                                  */
+/*****************************************************************/
+DBAttendance::DBAttendance(const QString &cardid)  // 根据Card ID 查询 tbl_attendance 表中的记录
+    : q(NULL)
+{
+    QString sql = QString("SELECT [id],[cardid],[name],[arriveLaterTimes],[leaveearlyTimes], [absenceTimes] FROM [tbl_attendance]");   //++++++++++++++++++++++++++
+    if(!cardid.isEmpty())
+        sql += QString(" WHERE [cardid] = '%1'").arg(cardid);
+    q = new QSqlQuery(*_mainDB);
+    q->exec(sql);
+    if(!q->isActive())
+    {
+        delete q;
+        q = NULL;
+    }
+    else
+        q->first();
+}
+
+DBAttendance::~DBAttendance()
+{
+    if(q)
+        delete q;
+}
+
+bool DBAttendance::first()
+{
+    if(q == NULL)
+        return false;
+    return q->first();
+}
+
+bool DBAttendance::next()
+{
+    if(q == NULL)
+        return false;
+    return q->next();
+}
+
+QString DBAttendance::cardid() const   // 返回 q->value(1) 给 cardid()
+{
+    if(q == NULL)
+        return QString();
+    if(!q->isActive())
+        return QString();
+    if(!q->isValid())
+        return QString();
+    return q->value(1).toString();
+}
+
+QString DBAttendance::name() const   // 返回 q->value(2) 给 name()
+{
+    if(q == NULL)
+        return QString();
+    if(!q->isActive())
+        return QString();
+    if(!q->isValid())
+        return QString();
+    return q->value(2).toString();
+}
+
+int DBAttendance::arriveLaterTimes() const   // 返回 q->value(3) 给 arriveLaterTimes()
+{
+    if(q == NULL)
+        return -1;
+    if(!q->isActive())
+        return -1;
+    if(!q->isValid())
+        return -1;
+    return q->value(3).toInt();
+}
+
+int DBAttendance::leaveearlyTimes() const   // 返回 q->value(4) 给 leaveearlyTimes()
+{
+    if(q == NULL)
+        return -1;
+    if(!q->isActive())
+        return -1;
+    if(!q->isValid())
+        return -1;
+    return q->value(4).toInt();
+}
+
+int DBAttendance::absenceTimes() const   // 返回 q->value(5) 给 absenceTimes()
+{
+    if(q == NULL)
+        return -1;
+    if(!q->isActive())
+        return -1;
+    if(!q->isValid())
+        return -1;
+    return q->value(5).toInt();
+}
+
+
+void DBAttendance::addlog(const QString &cardid, const QString &name, int arriveLaterTimes, int leaveearlyTimes, int absenceTimes)
+{
+    QString sql = QString(
+                "INSERT INTO [tbl_attendance] ([cardid],[name],[arriveLaterTimes],[leaveearlyTimes],[leaveEarly],[absenceTimes]) VALUES ('%1','%2','%3','%4','%5')"
+            ).arg(cardid).arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+
+}
+
+void DBAttendance::updatelog(const QString &cardid, const QString &name, int arriveLaterTimes, int leaveearlyTimes, int absenceTimes)
+{
+    QString sql = QString(
+                "UPDATE [tbl_attendance] SET [name] ='%1' [arriveLaterTimes]='%2' [leaveearlyTimes]='%3' [absenceTimes] = '4' WHERE [cardid] = '%5'").arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes).arg(cardid);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+}
+
+
+void DBAttendance::updatelogwitharrtimes(const QString &cardid, int arriveLaterTimes)
+{
+    QString sql = QString(
+               "UPDATE [tbl_attendance] SET [arriveLaterTimes]='%1'  WHERE [cardid] = '%2'").arg(arriveLaterTimes).arg(cardid);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+}
+
+void DBAttendance::updatelogwithleatimes(const QString &cardid, int leaveearlyTimes)
+{
+    QString sql = QString(
+               "UPDATE [tbl_attendance] SET [leaveearlyTimes]='%1'  WHERE [cardid] = '%2'").arg(leaveearlyTimes).arg(cardid);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+}
+
+void DBAttendance::updatelogwithabstimes(const QString &cardid, int absenceTimes)
+{
+    QString sql = QString(
+               "UPDATE [tbl_attendance] SET [absenceTimes]='%1'  WHERE [cardid] = '%2'").arg(absenceTimes).arg(cardid);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+}
+
+int DBAttendance::findarrTimes(const QString &cardid)
+{
+    QString sql = QString("SELECT [arriveLaterTimes] FROM [tbl_attendance] WHERE [cardid] = '%1'").arg(cardid);
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return -1;
+    }
+    if(!q.first())
+    {
+
+        return -1;
+    }
+    int ret = q.value(0).toInt();
+    q.finish();
+    return ret;
+}
+
+int DBAttendance::findleaTimes(const QString &cardid)
+{
+    QString sql = QString("SELECT [leaveearlyTimes] FROM [tbl_attendance] WHERE [cardid] = '%1'").arg(cardid);
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return -1;
+    }
+    if(!q.first())
+    {
+
+        return -1;
+    }
+    int ret = q.value(0).toInt();
+    q.finish();
+    return ret;
+}
+int DBAttendance::findabsTimes(const QString &cardid)
+{
+    QString sql = QString("SELECT [absenceTimes] FROM [tbl_attendance] WHERE [cardid] = '%1'").arg(cardid);
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return -1;
+    }
+    if(!q.first())
+    {
+
+        return -1;
+    }
+    int ret = q.value(0).toInt();
     q.finish();
     return ret;
 }
