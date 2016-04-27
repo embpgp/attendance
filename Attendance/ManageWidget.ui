@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManageWidget</class>
+ <widget class="QWidget" name="ManageWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>683</width>
+    <height>384</height>
+   </rect>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>用户管理</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="addBtn">
+          <property name="text">
+           <string>添加</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="delBtn">
+          <property name="text">
+           <string>删除</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="modifyBtn">
+          <property name="text">
+           <string>修改</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTreeWidget" name="userTable">
+        <column>
+         <property name="text">
+          <string>编号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>卡号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>姓名</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>性别</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>职业</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>邮箱</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>登录视图</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="refreshBtn">
+          <property name="text">
+           <string>刷新</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTreeWidget" name="logTable">
+        <column>
+         <property name="text">
+          <string>编号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>日期</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>卡号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>性别</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>职位</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>迟到</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>早退</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>迟到次数</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
