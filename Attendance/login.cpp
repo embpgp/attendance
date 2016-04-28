@@ -13,7 +13,7 @@ login::login(QWidget *parent) :
     w = NULL;
 
 
-    DBLog::findlogtimestoday("121");
+    //DBLog::findlogtimestoday("121");
 }
 int login::errorcount = 0;
 
