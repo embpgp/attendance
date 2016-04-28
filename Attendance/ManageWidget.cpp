@@ -69,7 +69,7 @@ void ManageWidget::updateLogTable()  //更新登录表
             item->setText(4, l.occupation());  //++++++++++++++++++++++++++++
             item->setText(5, l.arriveLate());
             item->setText(6, l.leaveEarly());
-            item->setText(7, l.arriveLateTimes());
+            //item->setText(7, l.arriveLateTimes());
             qDebug()<<l.date().toString()<<l.cardid()<<l.gender()<<l.arriveLate();
         } while(l.next());
     }

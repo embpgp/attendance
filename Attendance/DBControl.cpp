@@ -114,7 +114,7 @@ void DBControl::checkDatabase()  // 创建 表
                     <<"[occupation] TEXT  NOT NULL"       //++++++++++++++++++++++++++
                     <<"[arriveLate] TEXT  NOT NULL"
                     <<"[leaveEarly] TEXT  NOT NULL"
-                    <<"[arriveLateTimes] INT  NOT NULL"
+
                     );
     }
     if(!checkTable("tbl_setTime"))
@@ -534,16 +534,6 @@ QString DBLog::leaveEarly() const
     return q->value(6).toString();
 }
 
-QString DBLog::arriveLateTimes() const
-{
-    if(q == NULL)
-        return QString();
-    if(!q->isActive())
-        return QString();
-    if(!q->isValid())
-        return QString();
-    return q->value(7).toString();
-}
 
 QString DBLog::findArriveLate(const QString &cardid)
 {
@@ -589,7 +579,17 @@ QString DBLog::findArriveLateTimes(const QString &cardid)
 
 bool DBLog::isFirstLog(const QString &cardid) //判断是否第一次刷卡
 {
-    QString sql = QString("SELECT COUNT(*) FROM [tbl_log] WHERE [cardid] = '%1'").arg(cardid);
+    QDateTime d = QDateTime::currentDateTime();
+    char sql[512];
+    sprintf(sql, "SELECT COUNT(*) from [tbl_log] where  date between '%d-%02d-%02d' and '%d-%02d-%02d'",
+            d.date().year(), d.date().month(), d.date().day(),
+            d.date().year(), d.date().month(), d.date().day()+1
+           );
+    QString add = QString(" and cardid = '%1'").arg(cardid);
+    QByteArray ba = add.toLatin1();
+    strcat(sql,ba.data());
+
+    qDebug()<<"sql ......."<<sql;
     QSqlQuery q(*_mainDB);
     q.exec(sql);
     if(!q.isActive())
@@ -611,11 +611,11 @@ bool DBLog::isFirstLog(const QString &cardid) //判断是否第一次刷卡
 
 
 
-bool DBLog::addLog(const QString &cardid, const QString &gender, const QString &occupation, QString &arriveLate, QString &leaveEarly, int &arriveLateTimes )   // 添加 记录 至 tbl_log
+bool DBLog::addLog(const QString &cardid, const QString &gender, const QString &occupation, QString &arriveLate, QString &leaveEarly)   // 添加 记录 至 tbl_log
 {
     QString sql = QString(
-                "INSERT INTO [tbl_log] ([cardid],[gender],[occupation],[arriveLate],[leaveEarly],[arriveLateTimes]) VALUES ('%1','%2','%3','%4','%5','%6')"
-            ).arg(cardid).arg(gender).arg(occupation).arg(arriveLate).arg(leaveEarly).arg(arriveLateTimes);
+                "INSERT INTO [tbl_log] ([cardid],[gender],[occupation],[arriveLate],[leaveEarly]) VALUES ('%1','%2','%3','%4','%5')"
+            ).arg(cardid).arg(gender).arg(occupation).arg(arriveLate).arg(leaveEarly);
     QSqlQuery q(*_mainDB);
     bool ret = q.exec(sql);
     q.finish();

@@ -73,9 +73,9 @@ public:
     QString occupation() const;   //++++++++++++++++++++++++++
     QString arriveLate() const;
     QString leaveEarly() const;
-    QString arriveLateTimes() const;
 
-    static bool addLog(const QString &cardid, const QString &gender, const QString &occupation, QString &arriveLate, QString &quitEarly, int &arriveLateTimes);
+
+    static bool addLog(const QString &cardid, const QString &gender, const QString &occupation, QString &arriveLate, QString &quitEarly);
     static void delLog(int id);
     static void delLog(const QString &cardid);
     static void delOldLog(const QDateTime &d);
