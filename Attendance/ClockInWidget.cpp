@@ -157,35 +157,36 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
             {
                 if(t<=tSplite)
                 {
-                    qDebug()<<"First log : ";
-                    arriveLate = tr("是");
-                    leaveEarly = tr("否");
 
+                        qDebug()<<"First log : ";      //迟到记录加入，并且刷新出勤表
+                        arriveLate = tr("是");
+                        leaveEarly = tr("否");
 
-                    arriveLateTimes = 1;
+                        arriveLateTimes = 1;
 
+                        DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
+                        DBAttendance::addlog(cardid,DBCard::findName(cardid),1,0,0);
+                        QMessageBox::warning(this, tr("警告"), tr("同学你迟到了！"));
 
-                   // DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-
-                    QMessageBox::warning(this, tr("警告"), tr("同学你迟到了！"));
                 }
                 if(t>tSplite)
                 {
                     qDebug()<<"First log : ";
                     arriveLate = tr("否");
-                    leaveEarly = tr("是");
+                    leaveEarly = tr("是");   //第一次，，，早退
 
 
                     leaveearlyTimes=1;
 
-                  //  DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-
+                    DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
+                    DBAttendance::addlog(cardid,DBCard::findName(cardid),0,1,0);
                     QMessageBox::warning(this, tr("警告"), tr("同学你早退了！"));
                 }
 
             }
-            else
+            else//今天第二次刷卡
             {
+
                 qDebug()<<"Not First Login : ";
 
                 if(t>=t1 && t <= tSplite) //迟到还是早退
@@ -200,8 +201,8 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
 
 
 
-                 //   DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-
+                    DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
+                    DBAttendance::updatelogwitharrtimes(cardid,arriveLateTimes);
                     if(arriveLateTimes >= 5)
                     {
 
@@ -260,23 +261,21 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                 if(t>tSplite && t<t2)
                 {
                     qDebug()<<"Leave Early : ";
-                    arriveLate = DBLog::findArriveLate(cardid);
+                    arriveLate = tr("否");
                     leaveEarly = tr("是");
-                 //   arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
+
+                    leaveearlyTimes++;
 
                     // 需改 先删除相应记录再添加 DB::delLog(cardid)
-                    DBLog::delLog(cardid);
-                 //   DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
+
+                    DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
+                    DBAttendance::updatelogwithleatimes(cardid,leaveearlyTimes);
                     QMessageBox::warning(this, tr("警告"), tr("同学你早退了！"));
                 }
 
             }
 
-
-
         }
-
-
 
         return;
     }
@@ -285,57 +284,15 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
         qDebug()<<tr("没有迟到或早退: ");
         if(!name.isEmpty()) //卡是否登记
         {
-            if(DBLog::isFirstLog(cardid)) //是否第一次刷卡
-            {
-                if(t<t1)
-                {
-                    arriveLate = tr("否");
-                    leaveEarly = tr("未知");
-                    arriveLateTimes = 0;
 
-                 //   DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-                    QMessageBox::warning(this, tr("Warning"), tr("登录!"));
-                }
-                if(t>t2)
-                {
-                    arriveLate = tr("未知");
-                    leaveEarly = tr("否");
-                    arriveLateTimes = 0;
+            arriveLate = tr("否");
+            leaveEarly = tr("否");
 
-                //    DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-                    QMessageBox::warning(this, tr("Warning"), tr("离开!"));
-                }
+            DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
+            QMessageBox::warning(this, tr("Warning"), t<t1? tr("登陆!"):tr("离开"));
 
-            }
-            else
-            {
-                //arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
-                if(t<t1) //不是迟到
-                {
-                    arriveLate = tr("否");
-                    leaveEarly = tr("未知");
-
-                  //  DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-                    QMessageBox::warning(this, tr("Warning"), tr("登录!"));
-
-                }
-                if(t>t2) //不是早退
-                {
-                    arriveLate = DBLog::findArriveLate(cardid);
-                    leaveEarly = tr("否");
-
-                  //  DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly,arriveLateTimes);
-                    QMessageBox::warning(this, tr("Warning"), tr("离开!"));
-                }
-
-            }
         }
 
-
-//     QMessageBox::warning(this, tr("Warning"), tr("Login in!"));
-
     }
-
-
 
 }
