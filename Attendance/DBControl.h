@@ -85,7 +85,7 @@ public:
 
     static QString findArriveLate(const QString &cardid);
     static QString findLeaveEarly(const QString &cardid);
-    static QString findArriveLateTimes(const QString &cardid);
+   // static QString findArriveLateTimes(const QString &cardid);
     static bool isFirstLog(const QString &cardid);
     static int findlogtimestoday(const QString &cardid);
 

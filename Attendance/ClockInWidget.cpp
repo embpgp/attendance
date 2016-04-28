@@ -140,7 +140,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
 
         ui->label_6->setScaledContents(true);
         QString picName = QString("%1.jpg").arg(n);
-        qDebug()<<"set pic : "<<picName;
+
         setPicture(picName);
 
 
@@ -148,12 +148,11 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
 
 
     if( t>=t1 && t<=t2) //迟到或早退
-    {
-        qDebug()<<tr("迟到或者早退 : ");
+    {       
 
         if(!name.isEmpty()) //卡是否登记
         {
-            qDebug()<<tr("卡已经添加(登记) : ");
+
             if(DBLog::isFirstLog(cardid)) //是否第一次刷卡
             {
                 if(t<=tSplite)
@@ -191,7 +190,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
 
                 if(t>=t1 && t <= tSplite) //迟到还是早退
                 {
-                    arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
+                   // arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
                     qDebug()<<"Late Arrive : ";
                     arriveLate = tr("是");
                     leaveEarly = tr("未知");
@@ -310,7 +309,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
             }
             else
             {
-                arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
+                //arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
                 if(t<t1) //不是迟到
                 {
                     arriveLate = tr("否");

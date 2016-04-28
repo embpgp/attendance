@@ -146,11 +146,6 @@
           <string>早退</string>
          </property>
         </column>
-        <column>
-         <property name="text">
-          <string>迟到次数</string>
-         </property>
-        </column>
        </widget>
       </item>
      </layout>

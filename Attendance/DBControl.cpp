@@ -562,7 +562,7 @@ QString DBLog::findLeaveEarly(const QString &cardid)
     q.finish();
     return ret;
 }
-
+/*
 QString DBLog::findArriveLateTimes(const QString &cardid)
 {
     QString sql = QString("SELECT MAX([arriveLateTimes]) FROM [tbl_log] WHERE [cardid] = '%1'").arg(cardid);
@@ -576,6 +576,7 @@ QString DBLog::findArriveLateTimes(const QString &cardid)
     q.finish();
     return ret;
 }
+*/
 
 bool DBLog::isFirstLog(const QString &cardid) //判断是否第一次刷卡
 {
