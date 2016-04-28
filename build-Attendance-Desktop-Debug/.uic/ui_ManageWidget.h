@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ManageWidget.ui'
 **
-** Created: Tue Apr 26 22:42:41 2016
+** Created: Wed Apr 27 19:27:28 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -127,7 +127,7 @@ public:
         ___qtreewidgetitem->setText(2, QApplication::translate("ManageWidget", "\345\247\223\345\220\215", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(1, QApplication::translate("ManageWidget", "\345\215\241\345\217\267", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(0, QApplication::translate("ManageWidget", "\347\274\226\345\217\267", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("ManageWidget", "\347\231\273\345\275\225\350\247\206\345\233\276", 0, QApplication::UnicodeUTF8));
+        groupBox_2->setTitle(QApplication::translate("ManageWidget", "\350\200\203\345\213\244\350\256\260\345\275\225", 0, QApplication::UnicodeUTF8));
         refreshBtn->setText(QApplication::translate("ManageWidget", "\345\210\267\346\226\260", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem1 = logTable->headerItem();
         ___qtreewidgetitem1->setText(7, QApplication::translate("ManageWidget", "\350\277\237\345\210\260\346\254\241\346\225\260", 0, QApplication::UnicodeUTF8));

@@ -597,7 +597,7 @@ bool DBLog::isFirstLog(const QString &cardid) //判断是否第一次刷卡
     if(!q.first())
         return bool();
     int ret = q.value(0).toInt();
-    qDebug()<<"++++++++++++++++++++"<<ret;
+
     q.finish();
     if(0 == ret)
         return true;
@@ -704,6 +704,41 @@ void DBLog::delLogBetween(const QDateTime &dt1, const QDateTime &dt2)  // 删除
 }
 
 
+
+int DBLog::findlogtimestoday(const QString &cardid)
+{
+    QDateTime d = QDateTime::currentDateTime();
+    char sql[512];
+    sprintf(sql, "SELECT COUNT(*) from [tbl_log] where  date between '%d-%02d-%02d' and '%d-%02d-%02d'",
+            d.date().year(), d.date().month(), d.date().day(),
+            d.date().year(), d.date().month(), d.date().day()+1
+           );
+    QString add = QString(" and cardid = '%1'").arg(cardid);
+    QByteArray ba = add.toLatin1();
+    strcat(sql,ba.data());
+
+    qDebug()<<"sql ......."<<sql;
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return -1;
+    }
+    if(!q.first())
+    {
+
+        return -1;
+    }
+    int ret = q.value(0).toInt();
+    qDebug()<<"ret ..."<<ret;
+    q.finish();
+    return ret;
+
+}
 
 
 /*****************************************************************/

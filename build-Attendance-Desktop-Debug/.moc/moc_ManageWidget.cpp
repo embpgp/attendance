@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ManageWidget.h'
 **
-** Created: Wed Apr 27 00:02:45 2016
+** Created: Thu Apr 28 17:19:22 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!

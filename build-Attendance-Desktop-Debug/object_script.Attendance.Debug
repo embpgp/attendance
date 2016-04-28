@@ -22,6 +22,7 @@ INPUT(
 ./.obj\timesetdialog.o
 ./.obj\login.o
 ./.obj\managelogin.o
+./.obj\Selectwidget.o
 ./.obj\moc_ClockInWidget.o
 ./.obj\moc_ManageWidget.o
 ./.obj\moc_rotatenumberlabel.o
@@ -39,5 +40,6 @@ INPUT(
 ./.obj\moc_timesetdialog.o
 ./.obj\moc_login.o
 ./.obj\moc_managelogin.o
+./.obj\moc_Selectwidget.o
 ./.obj\qrc_res.o
 );

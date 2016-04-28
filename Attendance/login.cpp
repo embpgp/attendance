@@ -11,6 +11,9 @@ login::login(QWidget *parent) :
     ui->setupUi(this);
     ui->password->setEchoMode(QLineEdit::Password);
     w = NULL;
+
+
+    DBLog::findlogtimestoday("121");
 }
 int login::errorcount = 0;
 
