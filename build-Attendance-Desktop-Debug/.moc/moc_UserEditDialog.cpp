@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'UserEditDialog.h'
 **
-** Created: Tue Apr 26 22:43:33 2016
+** Created: Fri Apr 29 23:30:13 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!

@@ -85,7 +85,7 @@ public:
 
     static QString findArriveLate(const QString &cardid);
     static QString findLeaveEarly(const QString &cardid);
-   // static QString findArriveLateTimes(const QString &cardid);
+
     static bool isFirstLog(const QString &cardid);
     static int findlogtimestoday(const QString &cardid);
 
@@ -146,5 +146,34 @@ protected:
     QSqlQuery *q;
 
 };
+
+
+
+class DBSettime:public DBControl
+{
+public:
+    DBSettime();
+    virtual ~DBSettime();
+
+    bool first();
+    bool next();
+    QString starttime()const;
+    QString splitetime()const;
+    QString endtime()const;
+
+
+    static bool updatatime(const QString &starttime,const QString &splitetime, const QString &endtime);
+
+
+    static QString findstarttime();
+    static QString findsplite();
+    static QString findendtime();
+
+
+protected:
+    QSqlQuery *q;
+
+};
+
 
 #endif // DBCONTROL_H

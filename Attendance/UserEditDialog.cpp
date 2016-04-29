@@ -64,3 +64,4 @@ void UserEditDialog::on_pushButton_clicked()  //添加图片
     ui->label_5->setPixmap(pixmap);
 
 }
+

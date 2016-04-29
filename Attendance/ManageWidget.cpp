@@ -56,10 +56,13 @@ void ManageWidget::updateLogTable()  //更新登录表
 {
 
     ui->logTable->clear();
+
     DBLog l;
+
     if(l.first())
     {
         QTreeWidgetItem *item;
+
         do {
             item = new QTreeWidgetItem(ui->logTable);
             item->setText(0, QString::number(l.id()));
@@ -68,9 +71,7 @@ void ManageWidget::updateLogTable()  //更新登录表
             item->setText(3, l.gender());      //++++++++++++++++++++++++++++
             item->setText(4, l.occupation());  //++++++++++++++++++++++++++++
             item->setText(5, l.arriveLate());
-            item->setText(6, l.leaveEarly());
-            //item->setText(7, l.arriveLateTimes());
-            qDebug()<<l.date().toString()<<l.cardid()<<l.gender()<<l.arriveLate();
+            item->setText(6, l.leaveEarly());        
         } while(l.next());
     }
 }
@@ -97,6 +98,8 @@ void ManageWidget::on_addBtn_clicked()    // 添加卡片
 
     if(DBCard::addCard(usrEditDlg->cardId(), usrEditDlg->name(), usrEditDlg->gender(), usrEditDlg->occupation(), usrEditDlg->mailAddress()))
     {
+        //在每一个员工录取进来后就进行次数数据库的记录增加,直接初始化为0，0，0
+        DBAttendance::addlog(usrEditDlg->cardId(),usrEditDlg->name(),0,0,0);
         QMessageBox::warning(this, tr("提示"), tr("添加成功!"));
     }
     else

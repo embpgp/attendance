@@ -12,6 +12,7 @@
 ClockInWidget::ClockInWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::widget),
+    arriveLateTimes(0),
     leaveearlyTimes(0),
     absenceTimes(0)
 {
@@ -158,20 +159,20 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                 if(t<=tSplite)
                 {
 
-                        qDebug()<<"First log : ";      //迟到记录加入，并且刷新出勤表
+                        qDebug()<<"First log :迟到的 ";      //迟到记录加入，并且刷新出勤表
                         arriveLate = tr("是");
                         leaveEarly = tr("否");
 
                         arriveLateTimes = 1;
 
                         DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
-                        DBAttendance::addlog(cardid,DBCard::findName(cardid),1,0,0);
+                        DBAttendance::updatelogwitharrtimes(cardid, arriveLateTimes);
                         QMessageBox::warning(this, tr("警告"), tr("同学你迟到了！"));
 
                 }
-                if(t>tSplite)
+                else
                 {
-                    qDebug()<<"First log : ";
+                    qDebug()<<"第一次First log : 早退的";
                     arriveLate = tr("否");
                     leaveEarly = tr("是");   //第一次，，，早退
 
@@ -179,7 +180,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                     leaveearlyTimes=1;
 
                     DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
-                    DBAttendance::addlog(cardid,DBCard::findName(cardid),0,1,0);
+                    DBAttendance::updatelogwithleatimes(cardid, leaveearlyTimes);
                     QMessageBox::warning(this, tr("警告"), tr("同学你早退了！"));
                 }
 
@@ -191,14 +192,13 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
 
                 if(t>=t1 && t <= tSplite) //迟到还是早退
                 {
-                   // arriveLateTimes = DBLog::findArriveLateTimes(cardid).toInt();
-                    qDebug()<<"Late Arrive : ";
+
+                    qDebug()<<"Late Arrive :迟到的 ";
                     arriveLate = tr("是");
-                    leaveEarly = tr("未知");
+                    leaveEarly = tr("否");
 
-
+                    arriveLateTimes = DBAttendance::findarrTimes(cardid);
                     arriveLateTimes++;
-
 
 
                     DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
@@ -260,13 +260,14 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                 }
                 if(t>tSplite && t<t2)
                 {
-                    qDebug()<<"Leave Early : ";
+                    qDebug()<<"第二次Leave Early :早退的 ";
                     arriveLate = tr("否");
                     leaveEarly = tr("是");
 
+                    leaveearlyTimes = DBAttendance::findleaTimes(cardid);
                     leaveearlyTimes++;
 
-                    // 需改 先删除相应记录再添加 DB::delLog(cardid)
+
 
                     DBLog::addLog(cardid,gender,occupation,arriveLate,leaveEarly);
                     DBAttendance::updatelogwithleatimes(cardid,leaveearlyTimes);

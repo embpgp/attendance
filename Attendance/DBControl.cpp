@@ -119,10 +119,11 @@ void DBControl::checkDatabase()  // 创建 表
     }
     if(!checkTable("tbl_setTime"))
     {
-        createTable("tbl_setTime", QStringList()
+        createTable("tbl_settime", QStringList()
                     <<"[id] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT"
-                    <<"[startTime] TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL"
-                    <<"[endTime] TEXT  NOT NULL"
+                    <<"[starttime] TEXT NOT NULL"
+                    <<"[splitetime] TEXT NOT NULL"
+                    <<"[endtime] TEXT  NOT NULL"
 
                     );
     }
@@ -421,7 +422,7 @@ bool DBCard::updateOccupation(const QString &cardid, const QString &newoccupatio
 DBLog::DBLog(const QString &cardid)   // 根据 Card ID 查找 tbl_log表中 相应的记录
     : q(NULL)
 {
-    QString sql = QString("SELECT [id], [date], [cardid], [gender], [occupation], [arriveLate], [leaveEarly], [arriveLateTimes] FROM [tbl_log]");  //++++++++++++++++++++++++++
+    QString sql = QString("SELECT [id], [date], [cardid], [gender], [occupation], [arriveLate], [leaveEarly] FROM [tbl_log]");  //++++++++++++++++++++++++++
     if(!cardid.isEmpty())
         sql += QString(" WHERE [cardid] = '%1'").arg(cardid);
     q = new QSqlQuery(*_mainDB);
@@ -962,7 +963,7 @@ int DBAttendance::absenceTimes() const   // 返回 q->value(5) 给 absenceTimes(
 void DBAttendance::addlog(const QString &cardid, const QString &name, int arriveLaterTimes, int leaveearlyTimes, int absenceTimes)
 {
     QString sql = QString(
-                "INSERT INTO [tbl_attendance] ([cardid],[name],[arriveLaterTimes],[leaveearlyTimes],[leaveEarly],[absenceTimes]) VALUES ('%1','%2','%3','%4','%5')"
+                "INSERT INTO [tbl_attendance] ([cardid],[name],[arriveLateTimes],[leaveearlyTimes],[absenceTimes]) VALUES ('%1','%2','%3','%4','%5')"
             ).arg(cardid).arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes);
     QSqlQuery q(*_mainDB);
     q.exec(sql);
@@ -973,7 +974,7 @@ void DBAttendance::addlog(const QString &cardid, const QString &name, int arrive
 void DBAttendance::updatelog(const QString &cardid, const QString &name, int arriveLaterTimes, int leaveearlyTimes, int absenceTimes)
 {
     QString sql = QString(
-                "UPDATE [tbl_attendance] SET [name] ='%1' [arriveLaterTimes]='%2' [leaveearlyTimes]='%3' [absenceTimes] = '4' WHERE [cardid] = '%5'").arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes).arg(cardid);
+                "UPDATE [tbl_attendance] SET [name] ='%1' [arriveLateTimes]='%2' [leaveearlyTimes]='%3' [absenceTimes] = '4' WHERE [cardid] = '%5'").arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes).arg(cardid);
     QSqlQuery q(*_mainDB);
     q.exec(sql);
     q.finish();
@@ -983,7 +984,7 @@ void DBAttendance::updatelog(const QString &cardid, const QString &name, int arr
 void DBAttendance::updatelogwitharrtimes(const QString &cardid, int arriveLaterTimes)
 {
     QString sql = QString(
-               "UPDATE [tbl_attendance] SET [arriveLaterTimes]='%1'  WHERE [cardid] = '%2'").arg(arriveLaterTimes).arg(cardid);
+               "UPDATE [tbl_attendance] SET [arriveLateTimes]='%1'  WHERE [cardid] = '%2'").arg(arriveLaterTimes).arg(cardid);
     QSqlQuery q(*_mainDB);
     q.exec(sql);
     q.finish();
@@ -1009,7 +1010,7 @@ void DBAttendance::updatelogwithabstimes(const QString &cardid, int absenceTimes
 
 int DBAttendance::findarrTimes(const QString &cardid)
 {
-    QString sql = QString("SELECT [arriveLaterTimes] FROM [tbl_attendance] WHERE [cardid] = '%1'").arg(cardid);
+    QString sql = QString("SELECT [arriveLateTimes] FROM [tbl_attendance] WHERE [cardid] = '%1'").arg(cardid);
     QSqlQuery q(*_mainDB);
     if(!q.exec(sql))
     {
@@ -1073,4 +1074,47 @@ int DBAttendance::findabsTimes(const QString &cardid)
     int ret = q.value(0).toInt();
     q.finish();
     return ret;
+}
+
+
+
+
+
+
+/*****************************************************************/
+/* DBSettime class                                                  */
+/*****************************************************************/
+DBSettime::DBSettime()
+    : q(NULL)
+{
+    QString sql = QString("SELECT [id],[starttime],[splitetime],[endtime] FROM [tbl_settime]");   //++++++++++++++++++++++++++
+    q = new QSqlQuery(*_mainDB);
+    q->exec(sql);
+    if(!q->isActive())
+    {
+        delete q;
+        q = NULL;
+    }
+    else
+        q->first();
+}
+
+DBSettime::~DBSettime()
+{
+    if(q)
+        delete q;
+}
+
+bool DBSettime::first()
+{
+    if(q == NULL)
+        return false;
+    return q->first();
+}
+
+bool DBSettime::next()
+{
+    if(q == NULL)
+        return false;
+    return q->next();
 }
