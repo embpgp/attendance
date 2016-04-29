@@ -157,6 +157,7 @@ public:
 
     bool first();
     bool next();
+
     QString starttime()const;
     QString splitetime()const;
     QString endtime()const;

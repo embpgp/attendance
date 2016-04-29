@@ -974,7 +974,7 @@ void DBAttendance::addlog(const QString &cardid, const QString &name, int arrive
 void DBAttendance::updatelog(const QString &cardid, const QString &name, int arriveLaterTimes, int leaveearlyTimes, int absenceTimes)
 {
     QString sql = QString(
-                "UPDATE [tbl_attendance] SET [name] ='%1' [arriveLateTimes]='%2' [leaveearlyTimes]='%3' [absenceTimes] = '4' WHERE [cardid] = '%5'").arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes).arg(cardid);
+                "UPDATE [tbl_attendance] SET [name] ='%1' ,[arriveLateTimes]='%2' ,[leaveearlyTimes]='%3' ,[absenceTimes] = '4' WHERE [cardid] = '%5'").arg(name).arg(arriveLaterTimes).arg(leaveearlyTimes).arg(absenceTimes).arg(cardid);
     QSqlQuery q(*_mainDB);
     q.exec(sql);
     q.finish();
@@ -1117,4 +1117,119 @@ bool DBSettime::next()
     if(q == NULL)
         return false;
     return q->next();
+}
+
+QString DBSettime::starttime()const
+{
+    if(q == NULL)
+        return QString();
+    if(!q->isActive())
+        return QString();
+    if(!q->isValid())
+        return QString();
+    return q->value(1).toString();
+
+}
+
+QString DBSettime::splitetime()const
+{
+    if(q == NULL)
+        return QString();
+    if(!q->isActive())
+        return QString();
+    if(!q->isValid())
+        return QString();
+    return q->value(2).toString();
+
+}
+
+QString DBSettime::endtime()const
+{
+    if(q == NULL)
+        return QString();
+    if(!q->isActive())
+        return QString();
+    if(!q->isValid())
+        return QString();
+    return q->value(3).toString();
+
+}
+
+bool DBSettime::updatatime(const QString &starttime, const QString &splitetime, const QString &endtime)
+{
+    QString sql = QString(
+               "UPDATE [tbl_settime] SET [starttime]='%1' , [splitetime] = '%2' ,[endtime] = '%3'").arg(starttime).arg(splitetime).arg(endtime);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+
+}
+
+QString DBSettime::findstarttime()
+{
+    QString sql = QString("SELECT [starttime] FROM [tbl_settime]");
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return QString();
+    }
+    if(!q.first())
+    {
+
+        return QString();
+    }
+    QString ret = q.value(0).toString();//select 查询的时候只列举了一列，所以索引直接是0
+    q.finish();
+    return ret;
+}
+
+
+QString DBSettime::findendtime()
+{
+    QString sql = QString("SELECT [endtime] FROM [tbl_settime]");
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return QString();
+    }
+    if(!q.first())
+    {
+
+        return QString();
+    }
+    QString ret = q.value(0).toString();//select 查询的时候只列举了一列，所以索引直接是0
+    q.finish();
+    return ret;
+}
+QString DBSettime::findsplite()
+{
+    QString sql = QString("SELECT [splitetime] FROM [tbl_settime]");
+    QSqlQuery q(*_mainDB);
+    if(!q.exec(sql))
+    {
+        qDebug()<<"q.exec ....";
+    }
+    if(!q.isActive())
+    {
+
+        return QString();
+    }
+    if(!q.first())
+    {
+
+        return QString();
+    }
+    QString ret = q.value(0).toString();//select 查询的时候只列举了一列，所以索引直接是0
+    q.finish();
+    return ret;
 }
