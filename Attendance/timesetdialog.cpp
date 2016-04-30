@@ -1,7 +1,7 @@
 #include "timesetdialog.h"
 #include "ui_timesetdialog.h"
 #include "MainWidget.h"
-
+#include "DBControl.h"
 timeSetDialog::timeSetDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::timeSetDialog)
@@ -14,6 +14,8 @@ timeSetDialog::timeSetDialog(QWidget *parent) :
     QPalette palette;
     palette.setColor(QPalette::Background, QColor(150,150,153));
     this->setPalette(palette);
+
+
 }
 
 QString timeSetDialog::startTime() const //返回卡号
@@ -39,6 +41,8 @@ timeSetDialog::~timeSetDialog()
 
 void timeSetDialog::on_pushButton_clicked()
 {
+
+    emit emittime(startTime(),spliteTime(),endTime());
     this->close();
 
 }

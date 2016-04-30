@@ -19,9 +19,12 @@ public:
     QString spliteTime() const;
     QString endTime() const;
 
+
 private slots:
     void on_pushButton_clicked();
 
+signals:
+    void emittime(QString,QString,QString);
 private:
     Ui::timeSetDialog *ui;
 };

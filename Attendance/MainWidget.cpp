@@ -12,7 +12,8 @@ MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWidget),
     serialPort(NULL),
-    m(NULL)
+    m(NULL),
+    timeDialog(NULL)
 {
 
     ui->setupUi(this);
@@ -38,6 +39,7 @@ MainWidget::~MainWidget()
     DBControl::Destroy();
     delete ui;
     delete m;
+    delete timeDialog;
 }
 
 void MainWidget::start(const QString &port)
@@ -170,26 +172,11 @@ void MainWidget::on_setTimeButton_clicked()
 {
 
 
-    timeDialog.exec();
+    timeDialog = new timeSetDialog();
+    connect(timeDialog,SIGNAL(emittime(QString,QString,QString)),this,SLOT(settime(QString,QString,QString)));
 
-//    startT = timeDialog.startTime();
-//    endT   = timeDialog.endTime();
-//    qDebug()<<"You Set Time : "<<startT<<endT;
+    timeDialog->show();
 
-
-    ui->clockInPage->startT = timeDialog.startTime();
-    ui->clockInPage->spliteT = timeDialog.spliteTime();
-    ui->clockInPage->endT   = timeDialog.endTime();
-
-    //直接更新到数据库
-    DBSettime::updatatime(timeDialog.startTime(),timeDialog.spliteTime(),timeDialog.endTime());
-    //从对话框设置考勤时间
-    /*
-    qDebug()<<"You Set start Time : "<<ui->clockInPage->startT;
-    qDebug()<<"You Set start Time : "<<ui->clockInPage->spliteT;
-    qDebug()<<"You Set start Time : "<<ui->clockInPage->endT;
-
-*/
 
 }
 
@@ -198,4 +185,24 @@ void MainWidget::on_pushButton_clicked()
 {
     m = new Managelogin(this);
     m->show();
+}
+
+void MainWidget::settime(QString starttime, QString splitetime, QString endtime)
+{
+
+
+        ui->clockInPage->startT = starttime;
+        ui->clockInPage->spliteT = splitetime;
+        ui->clockInPage->endT   = endtime;
+
+    //直接更新到数据库
+    DBSettime::updatatime(starttime,splitetime,endtime);
+
+
+    //从对话框设置考勤时间
+
+    qDebug()<<"You Set start Time : "<<ui->clockInPage->startT;
+    qDebug()<<"You Set start Time : "<<ui->clockInPage->spliteT;
+    qDebug()<<"You Set start Time : "<<ui->clockInPage->endT;
+
 }

@@ -1,6 +1,7 @@
 #include "UserEditDialog.h"
 #include "ui_UserEditDialog.h"
 #include <QFileDialog>
+#include "DBControl.h"
 UserEditDialog::UserEditDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::UserEditDialog)

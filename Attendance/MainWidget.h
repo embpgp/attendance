@@ -20,7 +20,7 @@ public:
     ~MainWidget();
 
 
-    timeSetDialog timeDialog;
+
 
 
 
@@ -29,7 +29,7 @@ private:
     QextSerialPort *serialPort;
     QByteArray lastRecvedPackage;
     Managelogin *m;
-
+    timeSetDialog *timeDialog;
 
 signals:
     void newCard(QByteArray id);
@@ -46,6 +46,8 @@ private slots:
 
     void on_setTimeButton_clicked();
     void on_pushButton_clicked();
+
+    void settime(QString,QString,QString);
 };
 
 #endif // MAINWIDGET_H

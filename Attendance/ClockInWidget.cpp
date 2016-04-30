@@ -89,6 +89,12 @@ void ClockInWidget::updateTime()  //更新登录界面年月日时分秒
             do {
                 QString cardid = all.cardid();
                 int absence = DBLog::findlogtimestoday(cardid);
+                if(absence >= 2)
+                    return ;
+                QString gender = DBCard::findGender(cardid);
+                QString occupation = DBCard::findOccupation(cardid);
+                QString type = QString("缺勤");
+                DBLog::addLog(cardid,gender,occupation,type,type);
                 DBAttendance::updatelogwithabstimes(cardid,2-absence);
             } while(all.next());
         }

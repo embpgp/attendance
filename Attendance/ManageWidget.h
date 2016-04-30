@@ -34,6 +34,8 @@ private slots:
     void updateUserTable();
     void updateLogTable();
     void on_refreshBtn_released();
+
+
 };
 
 #endif // MANAGEWIDGET_H
