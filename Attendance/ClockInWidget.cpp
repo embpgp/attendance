@@ -9,7 +9,7 @@
 #include "sendemailapi/smtpmime.h"
 
 
-ClockInWidget::ClockInWidget(QWidget *parent) :
+ClockInWidget::ClockInWidget(QWidget *parent):
     QWidget(parent),
     ui(new Ui::widget),
     arriveLateTimes(0),
@@ -80,6 +80,19 @@ void ClockInWidget::updateTime()  //更新登录界面年月日时分秒
 {
     QDateTime d = QDateTime::currentDateTime();
     ui->secondNumber->display(d.time().second());
+    //决定直接在此处实现每一天的盘点，认为只要少于两次的都有缺勤次数
+    if(d.time().hour() == 23 && d.time().minute() == 50 && d.time().second() == 0)
+    {
+        DBCard all;
+        if(all.first())
+        {
+            do {
+                QString cardid = all.cardid();
+                int absence = DBLog::findlogtimestoday(cardid);
+                DBAttendance::updatelogwithabstimes(cardid,2-absence);
+            } while(all.next());
+        }
+    }
     if(d.time().second() == 0)
     {
         ui->minuteLabel->motionToNumber(d.time().minute());
