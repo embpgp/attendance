@@ -29,10 +29,14 @@ ClockInWidget::ClockInWidget(QWidget *parent) :
 //    qDebug()<<picName;
 //    setPicture(picName);
 
-    startT = "08:00:00";
+/*  startT = "08:00:00";
     spliteT= "12:00:00";
     endT   = "20:00:00";
-
+*/
+    //应该从数据库中读取默认保存的数据
+    startT = DBSettime::findstarttime();
+    spliteT = DBSettime::findsplite();
+    endT = DBSettime::findendtime();
     //设置默认的考勤时间（开始 结束 和 迟到截止时间）
     qDebug()<<"Default start Time : "<<startT;
     qDebug()<<"Default start Time : "<<spliteT;

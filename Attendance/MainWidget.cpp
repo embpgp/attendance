@@ -181,11 +181,15 @@ void MainWidget::on_setTimeButton_clicked()
     ui->clockInPage->spliteT = timeDialog.spliteTime();
     ui->clockInPage->endT   = timeDialog.endTime();
 
+    //直接更新到数据库
+    DBSettime::updatatime(timeDialog.startTime(),timeDialog.spliteTime(),timeDialog.endTime());
     //从对话框设置考勤时间
+    /*
     qDebug()<<"You Set start Time : "<<ui->clockInPage->startT;
     qDebug()<<"You Set start Time : "<<ui->clockInPage->spliteT;
     qDebug()<<"You Set start Time : "<<ui->clockInPage->endT;
 
+*/
 
 }
 
