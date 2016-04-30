@@ -145,6 +145,7 @@ void DBControl::checkDatabase()  // 创建 表
                     <<"[leaveearlyTimes] INT NOT NULL"
                     <<"[absenceTimes] INT NOT NULL"
                     );
+        DBSettime::addtimeonly();
     }
 }
 
