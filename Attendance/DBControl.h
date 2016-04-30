@@ -162,7 +162,7 @@ public:
     QString splitetime()const;
     QString endtime()const;
 
-
+    static void addtimeonly(const QString &starttime,const QString &splitetime, const QString &endtime);
     static bool updatatime(const QString &starttime,const QString &splitetime, const QString &endtime);
 
 

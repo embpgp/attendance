@@ -1155,14 +1155,23 @@ QString DBSettime::endtime()const
 
 }
 
+void DBSettime::addtimeonly(const QString &starttime, const QString &splitetime, const QString &endtime)
+{
+    QString sql = QString(
+                "INSERT INTO [tbl_settime] ([starttime], [splitetime],[endtime]) VALUES('%1','%2','%3')").arg(starttime).arg(splitetime).arg(endtime);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+}
+
 bool DBSettime::updatatime(const QString &starttime, const QString &splitetime, const QString &endtime)
 {
     QString sql = QString(
                "UPDATE [tbl_settime] SET [starttime]='%1' , [splitetime] = '%2' ,[endtime] = '%3'").arg(starttime).arg(splitetime).arg(endtime);
     QSqlQuery q(*_mainDB);
-    q.exec(sql);
+    bool ret = q.exec(sql);
     q.finish();
-
+    return ret;
 }
 
 QString DBSettime::findstarttime()

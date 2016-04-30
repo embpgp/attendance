@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWidget.ui'
 **
-** Created: Sat Apr 30 01:04:35 2016
+** Created: Sat Apr 30 12:46:11 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
