@@ -81,7 +81,7 @@ void ClockInWidget::updateTime()  //更新登录界面年月日时分秒
     QDateTime d = QDateTime::currentDateTime();
     ui->secondNumber->display(d.time().second());
     //决定直接在此处实现每一天的盘点，认为只要少于两次的都有缺勤次数
-    if(d.time().hour() == 23 && d.time().minute() == 50 && d.time().second() == 0)
+    if(d.time().hour() == 16 && d.time().minute() == 00 && d.time().second() == 0)
     {
         DBCard all;
         if(all.first())
@@ -90,7 +90,7 @@ void ClockInWidget::updateTime()  //更新登录界面年月日时分秒
                 QString cardid = all.cardid();
                 int absence = DBLog::findlogtimestoday(cardid);
                 if(absence >= 2)
-                    return ;
+                    continue ;
                 QString gender = DBCard::findGender(cardid);
                 QString occupation = DBCard::findOccupation(cardid);
                 QString type = QString("缺勤");

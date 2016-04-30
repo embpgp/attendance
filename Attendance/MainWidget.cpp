@@ -21,7 +21,7 @@ MainWidget::MainWidget(QWidget *parent) :
     
     IOPortManager::setMode(Mode125K); // 125K的设备
 
-    setWindowTitle(tr("毕业设计"));
+    setWindowTitle(tr("毕业设计-考勤管理系统"));
     ui->label->setText(tr("考勤管理系统"));
 
     //设置主窗体背景颜色
