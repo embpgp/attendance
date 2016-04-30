@@ -8,7 +8,7 @@ QT       += core gui sql network
 
 TARGET = Attendance
 TEMPLATE = app
-
+RC_FILE += rfid.rc
 OBJECTS_DIR = .obj
 MOC_DIR = .moc
 UI_DIR = .uic
@@ -92,3 +92,5 @@ linux-* {
     target.path = /root
     INSTALLS += target
 }
+
+
