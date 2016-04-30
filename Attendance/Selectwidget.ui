@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>639</width>
-    <height>300</height>
+    <height>371</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>scan</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>20</x>
      <y>20</y>
      <width>591</width>
-     <height>281</height>
+     <height>351</height>
     </rect>
    </property>
    <property name="title">
@@ -61,13 +61,13 @@
      <string>查询</string>
     </property>
    </widget>
-   <widget class="QTreeWidget" name="treeWidget">
+   <widget class="QTreeWidget" name="showtable">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>60</y>
       <width>591</width>
-      <height>211</height>
+      <height>261</height>
      </rect>
     </property>
     <column>

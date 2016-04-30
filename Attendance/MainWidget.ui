@@ -90,7 +90,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="ClockInWidget" name="clockInPage">
       <attribute name="title">
@@ -100,6 +100,11 @@
      <widget class="ManageWidget" name="manPage">
       <attribute name="title">
        <string>Manage</string>
+      </attribute>
+     </widget>
+     <widget class="SelectWidget" name="scanPage">
+      <attribute name="title">
+       <string>scan</string>
       </attribute>
      </widget>
     </widget>
@@ -118,6 +123,12 @@
    <class>ManageWidget</class>
    <extends>QWidget</extends>
    <header>ManageWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SelectWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">selectwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
