@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWidget.ui'
 **
-** Created: Thu Apr 28 22:52:40 2016
+** Created: Sat Apr 30 16:17:42 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -23,6 +23,7 @@
 #include <QtGui/QTabWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <selectwidget.h>
 #include "ClockInWidget.h"
 #include "ManageWidget.h"
 
@@ -44,6 +45,7 @@ public:
     QTabWidget *tabWidget;
     ClockInWidget *clockInPage;
     ManageWidget *manPage;
+    SelectWidget *scanPage;
 
     void setupUi(QWidget *MainWidget)
     {
@@ -114,13 +116,16 @@ public:
         manPage = new ManageWidget();
         manPage->setObjectName(QString::fromUtf8("manPage"));
         tabWidget->addTab(manPage, QString());
+        scanPage = new SelectWidget();
+        scanPage->setObjectName(QString::fromUtf8("scanPage"));
+        tabWidget->addTab(scanPage, QString());
 
         verticalLayout->addWidget(tabWidget);
 
 
         retranslateUi(MainWidget);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWidget);
@@ -137,6 +142,7 @@ public:
         openCloseSerialPort->setText(QApplication::translate("MainWidget", "\346\211\223\345\274\200", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(clockInPage), QApplication::translate("MainWidget", "Clock in", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(manPage), QApplication::translate("MainWidget", "Manage", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(scanPage), QApplication::translate("MainWidget", "scan", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

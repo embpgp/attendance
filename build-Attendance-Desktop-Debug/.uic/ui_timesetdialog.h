@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'timesetdialog.ui'
 **
-** Created: Tue Apr 26 22:42:41 2016
+** Created: Sat Apr 30 16:15:05 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -58,7 +58,7 @@ public:
         spliteTimeEdit->setGeometry(QRect(160, 90, 118, 22));
         pushButton = new QPushButton(timeSetDialog);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(250, 180, 75, 23));
+        pushButton->setGeometry(QRect(240, 180, 75, 23));
 
         retranslateUi(timeSetDialog);
 
