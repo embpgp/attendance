@@ -95,7 +95,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>考勤管理系统登陆界面</string>
+    <string>签到管理系统登陆界面</string>
    </property>
   </widget>
  </widget>

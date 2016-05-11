@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Selectwidget.ui'
 **
-** Created: Sat Apr 30 14:32:04 2016
+** Created: Sun May 8 14:19:45 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -32,6 +32,7 @@ public:
     QLineEdit *name;
     QPushButton *select;
     QTreeWidget *showtable;
+    QPushButton *pushButton;
 
     void setupUi(QWidget *SelectWidget)
     {
@@ -40,7 +41,7 @@ public:
         SelectWidget->resize(639, 371);
         groupBox = new QGroupBox(SelectWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(20, 20, 591, 351));
+        groupBox->setGeometry(QRect(10, 20, 591, 351));
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(30, 16, 36, 20));
@@ -49,10 +50,13 @@ public:
         name->setGeometry(QRect(100, 10, 291, 31));
         select = new QPushButton(groupBox);
         select->setObjectName(QString::fromUtf8("select"));
-        select->setGeometry(QRect(440, 10, 75, 31));
+        select->setGeometry(QRect(420, 10, 75, 31));
         showtable = new QTreeWidget(groupBox);
         showtable->setObjectName(QString::fromUtf8("showtable"));
         showtable->setGeometry(QRect(0, 60, 591, 261));
+        pushButton = new QPushButton(groupBox);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(500, 10, 75, 31));
 
         retranslateUi(SelectWidget);
 
@@ -69,9 +73,10 @@ public:
         ___qtreewidgetitem->setText(5, QApplication::translate("SelectWidget", "\347\274\272\345\213\244\346\254\241\346\225\260", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(4, QApplication::translate("SelectWidget", "\346\227\251\351\200\200\346\254\241\346\225\260", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(3, QApplication::translate("SelectWidget", "\350\277\237\345\210\260\346\254\241\346\225\260", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem->setText(2, QApplication::translate("SelectWidget", "\350\201\214\344\270\232", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem->setText(2, QApplication::translate("SelectWidget", "\345\255\246\345\217\267", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(1, QApplication::translate("SelectWidget", "\346\200\247\345\210\253", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(0, QApplication::translate("SelectWidget", "\345\247\223\345\220\215", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("SelectWidget", "\345\210\267\346\226\260", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

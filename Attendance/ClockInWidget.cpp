@@ -1,4 +1,4 @@
-#include "ClockInWidget.h"
+﻿#include "ClockInWidget.h"
 #include "ui_ClockInWidget.h"
 #include <QDebug>
 #include <QDir>
@@ -33,7 +33,7 @@ ClockInWidget::ClockInWidget(QWidget *parent):
     spliteT= "12:00:00";
     endT   = "20:00:00";
 */
-    //应该从数据库中读取默认保存的数据
+    //应该从数据库中读取默认保存的数据，已经利用信号与槽机制从对话框中获得
     startT = DBSettime::findstarttime();
     spliteT = DBSettime::findsplite();
     endT = DBSettime::findendtime();
@@ -80,9 +80,13 @@ void ClockInWidget::updateTime()  //更新登录界面年月日时分秒
 {
     QDateTime d = QDateTime::currentDateTime();
     ui->secondNumber->display(d.time().second());
-    //决定直接在此处实现每一天的盘点，认为只要少于两次的都有缺勤次数
-    if(d.time().hour() == 16 && d.time().minute() == 00 && d.time().second() == 0)
+    QTime t = QTime::fromString(countT);
+
+    //决定直接在此处实现每一天的盘点，认为只要少于两次的都有旷课次数，每天的23:59:59进行判断
+    if(d.time().hour() == t.hour() && d.time().minute() == t.minute() && d.time().second() == t.second())
     {
+
+
         DBCard all;
         if(all.first())
         {
@@ -93,9 +97,9 @@ void ClockInWidget::updateTime()  //更新登录界面年月日时分秒
                     continue ;
                 QString gender = DBCard::findGender(cardid);
                 QString occupation = DBCard::findOccupation(cardid);
-                QString type = QString("缺勤");
+                QString type = QString("旷课");
                 DBLog::addLog(cardid,gender,occupation,type,type);
-                DBAttendance::updatelogwithabstimes(cardid,2-absence);
+                DBAttendance::updatelogwithabstimes(cardid,1-absence);
             } while(all.next());
         }
     }
@@ -153,7 +157,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
     QTime t2 = QTime::fromString(endT);
     QTime t = QTime::currentTime();
 
-    qDebug()<<"now Time : "<<t;
+
 
 
 
@@ -182,7 +186,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                 if(t<=tSplite)
                 {
 
-                        qDebug()<<"First log :迟到的 ";      //迟到记录加入，并且刷新出勤表
+                          //迟到记录加入，并且刷新出勤表
                         arriveLate = tr("是");
                         leaveEarly = tr("否");
 
@@ -195,7 +199,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                 }
                 else
                 {
-                    qDebug()<<"第一次First log : 早退的";
+
                     arriveLate = tr("否");
                     leaveEarly = tr("是");   //第一次，，，早退
 
@@ -211,7 +215,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
             else//今天第二次刷卡
             {
 
-                qDebug()<<"Not First Login : ";
+
 
                 if(t>=t1 && t <= tSplite) //迟到还是早退
                 {
@@ -236,13 +240,12 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                         SmtpClient smtp("smtp.qq.com",
                                         465,
                                         true?SmtpClient::SslConnection:SmtpClient::TcpConnection);
-                        smtp.setUser("aaaaaaaaa@test.com");    //发件人邮箱用户名
-                        smtp.setPassword("xxxxxxxxxx");//发件人邮箱用密码
+                        smtp.setUser("xxxxxxxxxx@qq.com");    //发件人邮箱用户名
+                        smtp.setPassword("**********");//发件人邮箱用密码
 
-                        //构建邮件主题,包含发件人收件人附件等.
+                                                //构建邮件主题,包含发件人收件人附件等.
                         MimeMessage message;
-                        message.setSender(new EmailAddress("xxxxxxxx@test.com")); //填写发件人邮箱地址
-
+                        message.setSender(new EmailAddress("xxxxxxxx@qq.com")); //填写发件人邮箱地址
                     //    //逐个添加收件人
                     //    QStringList receiver = ui->txtReceiverAddr->text().split(';');
                     //    for (int i = 0; i < receiver.size(); i++){
@@ -283,7 +286,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
                 }
                 if(t>tSplite && t<t2)
                 {
-                    qDebug()<<"第二次Leave Early :早退的 ";
+
                     arriveLate = tr("否");
                     leaveEarly = tr("是");
 
@@ -305,7 +308,7 @@ void ClockInWidget::onCardReaded(const QString &cardid) //读卡
     }
     else
     {
-        qDebug()<<tr("没有迟到或早退: ");
+
         if(!name.isEmpty()) //卡是否登记
         {
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'timesetdialog.h'
 **
-** Created: Sat Apr 30 16:18:26 2016
+** Created: Sun May 8 14:40:56 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -31,16 +31,17 @@ static const uint qt_meta_data_timeSetDialog[] = {
        1,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
-      18,   15,   14,   14, 0x05,
+      19,   15,   14,   14, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      52,   14,   14,   14, 0x08,
+      61,   14,   14,   14, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_timeSetDialog[] = {
-    "timeSetDialog\0\0,,\0emittime(QString,QString,QString)\0"
+    "timeSetDialog\0\0,,,\0"
+    "emittime(QString,QString,QString,QString)\0"
     "on_pushButton_clicked()\0"
 };
 
@@ -73,7 +74,7 @@ int timeSetDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: emittime((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
+        case 0: emittime((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
         case 1: on_pushButton_clicked(); break;
         default: ;
         }
@@ -83,9 +84,9 @@ int timeSetDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void timeSetDialog::emittime(QString _t1, QString _t2, QString _t3)
+void timeSetDialog::emittime(QString _t1, QString _t2, QString _t3, QString _t4)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

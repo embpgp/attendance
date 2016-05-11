@@ -2,6 +2,7 @@
 #include "ui_Selectwidget.h"
 #include "DBControl.h"
 #include <QMessageBox>
+#include <QDebug>
 SelectWidget::SelectWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SelectWidget)
@@ -37,4 +38,29 @@ void SelectWidget::on_select_clicked()
             item->setText(5, QString::number(DBAttendance::findabsTimes(cardid)));
         } while(0);
 
+}
+
+void SelectWidget::on_pushButton_clicked()
+{
+      ui->showtable->clear();
+
+      DBAttendance att;
+
+      if(att.first())
+      {
+        QTreeWidgetItem *item;
+
+
+        do {
+
+            item = new QTreeWidgetItem(ui->showtable);
+            item->setText(0, DBCard::findName(att.cardid()));
+            item->setText(1, DBCard::findGender(att.cardid()));
+            item->setText(2, DBCard::findOccupation(att.cardid()));
+            item->setText(3, QString::number(DBAttendance::findarrTimes(att.cardid())));      //++++++++++++++++++++++++++++
+            item->setText(4, QString::number(DBAttendance::findleaTimes(att.cardid())));  //++++++++++++++++++++++++++++
+            item->setText(5, QString::number(DBAttendance::findabsTimes(att.cardid())));
+        } while(att.next());
+
+      }
 }

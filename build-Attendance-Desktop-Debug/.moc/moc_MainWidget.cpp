@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MainWidget.h'
 **
-** Created: Sat Apr 30 15:46:08 2016
+** Created: Sun May 8 13:09:50 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -42,7 +42,7 @@ static const uint qt_meta_data_MainWidget[] = {
      139,   11,   11,   11, 0x08,
      172,   11,   11,   11, 0x08,
      199,   11,   11,   11, 0x08,
-     226,  223,   11,   11, 0x08,
+     227,  223,   11,   11, 0x08,
 
        0        // eod
 };
@@ -54,8 +54,8 @@ static const char qt_meta_stringdata_MainWidget[] = {
     "on_refreshSerialPortList_clicked()\0"
     "on_openCloseSerialPort_clicked()\0"
     "on_setTimeButton_clicked()\0"
-    "on_pushButton_clicked()\0,,\0"
-    "settime(QString,QString,QString)\0"
+    "on_pushButton_clicked()\0,,,\0"
+    "settime(QString,QString,QString,QString)\0"
 };
 
 const QMetaObject MainWidget::staticMetaObject = {
@@ -96,7 +96,7 @@ int MainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 6: on_openCloseSerialPort_clicked(); break;
         case 7: on_setTimeButton_clicked(); break;
         case 8: on_pushButton_clicked(); break;
-        case 9: settime((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
+        case 9: settime((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
         default: ;
         }
         _id -= 10;

@@ -14,7 +14,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>用户管理</string>
+      <string>学生管理</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -66,7 +66,7 @@
         </column>
         <column>
          <property name="text">
-          <string>职业</string>
+          <string>学号</string>
          </property>
         </column>
         <column>
@@ -82,7 +82,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>考勤记录</string>
+      <string>签到记录</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -133,7 +133,7 @@
         </column>
         <column>
          <property name="text">
-          <string>职位</string>
+          <string>学号</string>
          </property>
         </column>
         <column>

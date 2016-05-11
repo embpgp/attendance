@@ -57,7 +57,7 @@
      <item>
       <widget class="QPushButton" name="setTimeButton">
        <property name="text">
-        <string>设置考勤时间</string>
+        <string>设置签到时间</string>
        </property>
       </widget>
      </item>
@@ -90,7 +90,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="ClockInWidget" name="clockInPage">
       <attribute name="title">

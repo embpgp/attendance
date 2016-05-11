@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'timesetdialog.ui'
 **
-** Created: Sat Apr 30 16:15:05 2016
+** Created: Sun May 8 13:09:33 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -32,12 +32,14 @@ public:
     QLabel *label_3;
     QTimeEdit *spliteTimeEdit;
     QPushButton *pushButton;
+    QLabel *label_4;
+    QTimeEdit *countTimeEdit;
 
     void setupUi(QDialog *timeSetDialog)
     {
         if (timeSetDialog->objectName().isEmpty())
             timeSetDialog->setObjectName(QString::fromUtf8("timeSetDialog"));
-        timeSetDialog->resize(376, 241);
+        timeSetDialog->resize(376, 321);
         startTimeEdit = new QTimeEdit(timeSetDialog);
         startTimeEdit->setObjectName(QString::fromUtf8("startTimeEdit"));
         startTimeEdit->setGeometry(QRect(160, 50, 118, 22));
@@ -58,7 +60,13 @@ public:
         spliteTimeEdit->setGeometry(QRect(160, 90, 118, 22));
         pushButton = new QPushButton(timeSetDialog);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(240, 180, 75, 23));
+        pushButton->setGeometry(QRect(240, 220, 75, 23));
+        label_4 = new QLabel(timeSetDialog);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(40, 180, 54, 12));
+        countTimeEdit = new QTimeEdit(timeSetDialog);
+        countTimeEdit->setObjectName(QString::fromUtf8("countTimeEdit"));
+        countTimeEdit->setGeometry(QRect(160, 170, 118, 22));
 
         retranslateUi(timeSetDialog);
 
@@ -72,6 +80,7 @@ public:
         label_2->setText(QApplication::translate("timeSetDialog", "\347\273\223\346\235\237\346\227\266\351\227\264", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("timeSetDialog", "\350\277\237\345\210\260\346\210\252\346\255\242", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("timeSetDialog", "\347\241\256\345\256\232", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("timeSetDialog", "\347\273\237\350\256\241\346\227\266\351\227\264", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

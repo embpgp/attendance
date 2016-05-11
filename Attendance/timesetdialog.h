@@ -18,13 +18,14 @@ public:
     QString startTime() const;
     QString spliteTime() const;
     QString endTime() const;
+    QString countTime()const;
 
 
 private slots:
     void on_pushButton_clicked();
 
 signals:
-    void emittime(QString,QString,QString);
+    void emittime(QString,QString,QString,QString);
 private:
     Ui::timeSetDialog *ui;
 };

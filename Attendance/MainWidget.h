@@ -47,7 +47,7 @@ private slots:
     void on_setTimeButton_clicked();
     void on_pushButton_clicked();
 
-    void settime(QString,QString,QString);
+    void settime(QString,QString,QString,QString);
 };
 
 #endif // MAINWIDGET_H

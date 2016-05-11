@@ -33,7 +33,10 @@ QString timeSetDialog::endTime() const //返回卡号
 {
     return ui->endTimeEdit->text();
 }
-
+QString timeSetDialog::countTime()const
+{
+    return ui->countTimeEdit->text();
+}
 timeSetDialog::~timeSetDialog()
 {
     delete ui;
@@ -42,7 +45,7 @@ timeSetDialog::~timeSetDialog()
 void timeSetDialog::on_pushButton_clicked()
 {
 
-    emit emittime(startTime(),spliteTime(),endTime());
+    emit emittime(startTime(),spliteTime(),endTime(),countTime());
     this->close();
 
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWidget.ui'
 **
-** Created: Sat Apr 30 15:44:58 2016
+** Created: Sun May 8 14:38:07 2016
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -125,7 +125,7 @@ public:
 
         retranslateUi(MainWidget);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWidget);
@@ -136,7 +136,7 @@ public:
         MainWidget->setWindowTitle(QApplication::translate("MainWidget", "MainWidget", 0, QApplication::UnicodeUTF8));
         label->setText(QString());
         pushButton->setText(QApplication::translate("MainWidget", "\347\231\273\351\231\206\347\256\241\347\220\206", 0, QApplication::UnicodeUTF8));
-        setTimeButton->setText(QApplication::translate("MainWidget", "\350\256\276\347\275\256\350\200\203\345\213\244\346\227\266\351\227\264", 0, QApplication::UnicodeUTF8));
+        setTimeButton->setText(QApplication::translate("MainWidget", "\350\256\276\347\275\256\347\255\276\345\210\260\346\227\266\351\227\264", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWidget", "CommList", 0, QApplication::UnicodeUTF8));
         refreshSerialPortList->setText(QApplication::translate("MainWidget", "\345\210\267\346\226\260", 0, QApplication::UnicodeUTF8));
         openCloseSerialPort->setText(QApplication::translate("MainWidget", "\346\211\223\345\274\200", 0, QApplication::UnicodeUTF8));

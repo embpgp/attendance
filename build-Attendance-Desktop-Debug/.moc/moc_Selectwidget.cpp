@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Selectwidget.h'
 **
-** Created: Sat Apr 30 14:34:56 2016
+** Created: Sun May 8 14:20:29 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_SelectWidget[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,12 +32,14 @@ static const uint qt_meta_data_SelectWidget[] = {
 
  // slots: signature, parameters, type, tag, flags
       14,   13,   13,   13, 0x08,
+      34,   13,   13,   13, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_SelectWidget[] = {
     "SelectWidget\0\0on_select_clicked()\0"
+    "on_pushButton_clicked()\0"
 };
 
 const QMetaObject SelectWidget::staticMetaObject = {
@@ -70,9 +72,10 @@ int SelectWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: on_select_clicked(); break;
+        case 1: on_pushButton_clicked(); break;
         default: ;
         }
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

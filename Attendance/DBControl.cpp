@@ -134,6 +134,8 @@ void DBControl::checkDatabase()  // 创建 表
                     <<"[username] TEXT UNIQUE NOT NULL "
                     <<"[password] TEXT  NOT NULL"
                     );
+
+        DBLogin::addUsername("root","root");
     }
     if(!checkTable("tbl_attendance"))     //出勤表
     {
@@ -711,10 +713,15 @@ void DBLog::delLogBetween(const QDateTime &dt1, const QDateTime &dt2)  // 删除
 int DBLog::findlogtimestoday(const QString &cardid)
 {
     QDateTime d = QDateTime::currentDateTime();
+    QTime start = QTime::fromString(DBSettime::findstarttime());
+    QTime end = QTime::fromString(DBSettime::findendtime());
+
     char sql[512];
-    sprintf(sql, "SELECT COUNT(*) from [tbl_log] where  date between '%d-%02d-%02d' and '%d-%02d-%02d'",
+    sprintf(sql, "SELECT COUNT(*) from [tbl_log] where  date between '%d-%02d-%02d' '%2d:%2d:2d' and '%d-%02d-%02d' '%2d:%2d:%2d'",
             d.date().year(), d.date().month(), d.date().day(),
-            d.date().year(), d.date().month(), d.date().day()+1
+            start.hour(),start.minute(),start.second(),
+            d.date().year(), d.date().month(), d.date().day(),
+            end.hour(),end.minute(),end.second()
            );
     QString add = QString(" and cardid = '%1'").arg(cardid);
     QByteArray ba = add.toLatin1();
@@ -729,12 +736,12 @@ int DBLog::findlogtimestoday(const QString &cardid)
     if(!q.isActive())
     {
 
-        return -1;
+        return 0;
     }
     if(!q.first())
     {
 
-        return -1;
+        return 0;
     }
     int ret = q.value(0).toInt();
     qDebug()<<"ret ..."<<ret;
@@ -871,7 +878,7 @@ QString DBLogin::findPassword(const QString &username)
 DBAttendance::DBAttendance(const QString &cardid)  // 根据Card ID 查询 tbl_attendance 表中的记录
     : q(NULL)
 {
-    QString sql = QString("SELECT [id],[cardid],[name],[arriveLaterTimes],[leaveearlyTimes], [absenceTimes] FROM [tbl_attendance]");   //++++++++++++++++++++++++++
+    QString sql = QString("SELECT [id],[cardid],[name],[arriveLateTimes],[leaveearlyTimes], [absenceTimes] FROM [tbl_attendance]");   //++++++++++++++++++++++++++
     if(!cardid.isEmpty())
         sql += QString(" WHERE [cardid] = '%1'").arg(cardid);
     q = new QSqlQuery(*_mainDB);

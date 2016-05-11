@@ -24,6 +24,9 @@ public:
     QString startT;
     QString endT;
     QString spliteT;
+    QString countT;
+
+
 
     QString arriveLate;    //第一次到的时间
     QString leaveEarly;    //第二次走的时间

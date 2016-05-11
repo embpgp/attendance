@@ -21,8 +21,8 @@ MainWidget::MainWidget(QWidget *parent) :
     
     IOPortManager::setMode(Mode125K); // 125K的设备
 
-    setWindowTitle(tr("毕业设计-考勤管理系统"));
-    ui->label->setText(tr("考勤管理系统"));
+    setWindowTitle(tr("毕业设计-签到管理系统"));
+    ui->label->setText(tr("签到管理系统"));
 
     //设置主窗体背景颜色
     this->setAutoFillBackground(true);
@@ -173,7 +173,7 @@ void MainWidget::on_setTimeButton_clicked()
 
 
     timeDialog = new timeSetDialog();
-    connect(timeDialog,SIGNAL(emittime(QString,QString,QString)),this,SLOT(settime(QString,QString,QString)));
+    connect(timeDialog,SIGNAL(emittime(QString,QString,QString,QString)),this,SLOT(settime(QString,QString,QString,QString)));
 
     timeDialog->show();
 
@@ -187,13 +187,14 @@ void MainWidget::on_pushButton_clicked()
     m->show();
 }
 
-void MainWidget::settime(QString starttime, QString splitetime, QString endtime)
+void MainWidget::settime(QString starttime, QString splitetime, QString endtime, QString counttime)
 {
 
 
         ui->clockInPage->startT = starttime;
         ui->clockInPage->spliteT = splitetime;
         ui->clockInPage->endT   = endtime;
+        ui->clockInPage->countT = counttime;
 
     //直接更新到数据库
     DBSettime::updatatime(starttime,splitetime,endtime);
@@ -202,7 +203,7 @@ void MainWidget::settime(QString starttime, QString splitetime, QString endtime)
     //从对话框设置考勤时间
 
     qDebug()<<"You Set start Time : "<<ui->clockInPage->startT;
-    qDebug()<<"You Set start Time : "<<ui->clockInPage->spliteT;
-    qDebug()<<"You Set start Time : "<<ui->clockInPage->endT;
-
+    qDebug()<<"You Set splite Time : "<<ui->clockInPage->spliteT;
+    qDebug()<<"You Set end Time : "<<ui->clockInPage->endT;
+    qDebug()<<"You Set countTime:"<<ui->clockInPage->countT;
 }
