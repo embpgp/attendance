@@ -137,6 +137,9 @@ public:
     static void updatelogwithleatimes(const QString &cardid, int leaveearlyTimes);
     static void updatelogwithabstimes(const QString &cardid, int absenceTimes);
 
+
+    static void deletelogwithcardid(const QString &cardid);
+
     static int findarrTimes(const QString &cardid);
     static int findleaTimes(const QString &cardid);
     static int findabsTimes(const QString &cardid);

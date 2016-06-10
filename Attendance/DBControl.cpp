@@ -379,11 +379,19 @@ void DBCard::delCard(const QString &cardid)   // 删除 卡
 
 bool DBCard::updateName(const QString &cardid, const QString &newname, const QString &gender, const QString &occuption, const QString &mailAddress)   //   更新 卡的 Name < 即 先删除 再添加卡 >
 {
+    /*
     if(!findCard(newname).isEmpty())
         return false;
     if(!findName(cardid).isEmpty())
         delCard(cardid);
     return addCard(cardid, newname, gender, occuption, mailAddress);
+    */
+    QString sql = QString(
+                "UPDATE [tbl_id] SET [gender] ='%1' ,[occupation]='%2' ,[mailAddress]='%3'  where [cardid] = '%4'").arg(gender).arg(occuption).arg(mailAddress).arg(cardid);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+
 }
 
 
@@ -1015,6 +1023,17 @@ void DBAttendance::updatelogwithabstimes(const QString &cardid, int absenceTimes
     q.exec(sql);
     q.finish();
 }
+
+void DBAttendance::deletelogwithcardid(const QString &cardid)
+{
+    QString sql = QString(
+            "DELETE FROM [tbl_attendance] WHERE [cardid] = '%1'").arg(cardid);
+    QSqlQuery q(*_mainDB);
+    q.exec(sql);
+    q.finish();
+
+}
+
 
 int DBAttendance::findarrTimes(const QString &cardid)
 {

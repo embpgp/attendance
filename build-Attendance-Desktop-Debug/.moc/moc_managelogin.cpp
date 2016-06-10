@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'managelogin.h'
 **
-** Created: Sat Apr 30 13:00:12 2016
+** Created: Fri Jun 10 20:19:19 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!

@@ -116,7 +116,9 @@ void ManageWidget::on_delBtn_clicked()    // 删除卡片
     while(selItems.count())
     {
         QTreeWidgetItem *item = selItems.first();
-        DBCard::delCard(item->text(1));
+        DBCard::delCard(item->text(1));    //删除了id表
+        DBAttendance::deletelogwithcardid(item->text(1));  //删除了出勤表
+        DBLog::delLog(item->text(1));   //删除了记录表
         delete item;
         selItems.removeFirst();
     }
